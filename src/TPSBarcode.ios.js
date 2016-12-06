@@ -5,8 +5,8 @@ import {
 } from 'react-native'
 
 const { TPSBarcodeManager } = NativeModules
-
 const ScannerView = requireNativeComponent('TPSBarcode', TPSBarcode)
+
 
 export default class TPSBarcode extends Component {
   static propTypes = {
@@ -17,19 +17,18 @@ export default class TPSBarcode extends Component {
 
   static defaultProps = {
     onBarcodeScanned: () => {},
+    styles: {},
   }
 
   componentWillMount() {
     TPSBarcodeManager.checkDeviceAuthorizationStatus()
-      .then(data => console.log(data))
-      .catch(error => console.log(error))
   }
 
   render() {
     const { children, styles, onBarcodeScanned } = this.props
     return (
       <ScannerView
-        style={{ width: 300, height: 300 }}
+        style={{ width: styles.width, height: styles.height }}
         onBarcodeScanned={onBarcodeScanned}>
         {children}
       </ScannerView>
