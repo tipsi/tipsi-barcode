@@ -7,26 +7,39 @@
 import React, { Component } from 'react'
 import {
   AppRegistry,
-  StyleSheet,
   View,
+  Text,
+  Dimensions,
 } from 'react-native'
 import TPSBarcode from 'tipsi-barcode'
 
+const { width, height } = Dimensions.get('window')
+
 export default class example extends Component {
-  onBarcodeScanned = (event) => {
-    console.log(event.nativeEvent)
+  state = {
+    scannedText: '',
+  }
+
+  onBarcodeScanned = ({ data: scannedText = '' }) => {
+    this.setState({ scannedText })
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <TPSBarcode onBarcodeScanned={this.onBarcodeScanned} style={{ width: 400, height: 600 }} />
+        <Text style={{ marginBottom: 20, fontSize: 20, fontWeight: 'bold' }}>
+          Tipsi Barcode Scanner
+        </Text>
+        <TPSBarcode styles={styles.scanner} onBarcodeScanned={this.onBarcodeScanned} />
+        <Text style={{ marginTop: 20, fontSize: 16 }}>
+          {this.state.scannedText}
+        </Text>
       </View>
     )
   }
 }
 
-const styles = StyleSheet.create({
+const styles = {
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -43,6 +56,10 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
-})
+  scanner: {
+    width,
+    height: height - 135,
+  },
+}
 
 AppRegistry.registerComponent('example', () => example)
