@@ -54,10 +54,8 @@ RCT_EXPORT_METHOD(openAppSettings:(RCTPromiseResolveBlock)resolve
 
 RCT_EXPORT_VIEW_PROPERTY(onBarcodeScanned, RCTBubblingEventBlock);
 
-RCT_EXPORT_METHOD(startCamera:(RCTPromiseResolveBlock)resolve
-                  rejecter:(RCTPromiseRejectBlock)reject) {
+RCT_EXPORT_METHOD(startCamera) {
     [self.barcodeView startCamera];
-    resolve(@"success");
 }
 
 RCT_EXPORT_METHOD(checkDeviceAuthorizationStatus:(RCTPromiseResolveBlock)resolve

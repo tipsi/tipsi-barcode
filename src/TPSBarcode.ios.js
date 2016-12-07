@@ -28,7 +28,7 @@ export default class TPSBarcode extends Component {
   async componentWillMount() {
     try {
       await TPSBarcodeManager.checkDeviceAuthorizationStatus()
-      await TPSBarcodeManager.startCamera()
+      TPSBarcodeManager.startCamera()
     } catch (error) {
       Alert.alert(
         'Permissions error',
