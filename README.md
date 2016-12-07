@@ -2,4 +2,5 @@
 React Native Barcode Scanner for IOS/Android
 
 ### iOS
-![image](https://cloud.githubusercontent.com/assets/1788245/20939486/1074adc4-bc00-11e6-81dd-94f9cda23dee.png)
+![image](https://cloud.githubusercontent.com/assets/1788245/20975154/9a6bcda0-bcaf-11e6-9a42-6584e1beeb49.png)
+
