@@ -15,11 +15,20 @@
 
 @implementation TPSBarcode
 
+- (void) dealloc {
+    [self stopCapture];
+}
+
 - (id) initWithQueue:(dispatch_queue_t)queue {
-    if ((self = [super init])) {
+    if (self = [super init]) {
+        self.session = [AVCaptureSession new];
+        
+        self.previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:self.session];
+        [self.layer insertSublayer:self.previewLayer atIndex:0];
+        [self.previewLayer setNeedsDisplayOnBoundsChange:YES];
+        [self.previewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+        
         self.queue = queue;
-        [self initCamera];
-        [self startCapture];
     }
     return self;
 }
@@ -28,8 +37,6 @@
 #if TARGET_IPHONE_SIMULATOR
     return;
 #endif
-    self.session = [AVCaptureSession new];
-    
     AVCaptureDevice *captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:captureDevice error:nil];
     [self.session addInput:input];
@@ -38,14 +45,10 @@
     
     [captureMetadataOutput setMetadataObjectsDelegate:self queue:self.queue];
     [captureMetadataOutput setMetadataObjectTypes:[captureMetadataOutput availableMetadataObjectTypes]];
-    
-    self.previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:self.session];
-    
-    [self.previewLayer setNeedsDisplayOnBoundsChange:YES];
-    [self.previewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
 }
 
-- (void) startCapture {
+- (void) startCamera {
+    [self initCamera];
     [self.session startRunning];
 }
 
@@ -83,22 +86,6 @@
 - (void) layoutSubviews {
     [super layoutSubviews];
     [self.previewLayer setFrame:self.bounds];
-    [self setBackgroundColor:[UIColor blackColor]];
-    [self.layer insertSublayer:self.previewLayer atIndex:0];
-}
-
-- (void) insertReactSubview:(UIView *)subview atIndex:(NSInteger)atIndex {
-    [super insertReactSubview:subview atIndex:atIndex + 1];
-    [self insertSubview:subview atIndex:atIndex + 1];
-}
-
-- (void)removeReactSubview:(UIView *)subview {
-    [super removeReactSubview:subview];
-}
-
-- (void)removeFromSuperview {
-    [self stopCapture];
-    [super removeFromSuperview];
 }
 
 @end

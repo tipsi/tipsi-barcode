@@ -19,8 +19,7 @@
 @property (nonatomic, copy) RCTBubblingEventBlock onBarcodeScanned;
 
 - (id)initWithQueue:(dispatch_queue_t)queue;
-- (void)initCamera;
-- (void)startCapture;
+- (void)startCamera;
 - (void)stopCapture;
 
 @end
