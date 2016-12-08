@@ -21,5 +21,6 @@
 - (id)initWithQueue:(dispatch_queue_t)queue;
 - (void)startCamera;
 - (void)stopCapture;
+- (void)barcodeScanned:(NSString *)result;
 
 @end

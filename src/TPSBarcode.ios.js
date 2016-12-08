@@ -3,6 +3,8 @@ import {
   NativeModules,
   requireNativeComponent,
   Alert,
+  View,
+  Button,
 } from 'react-native'
 
 const { TPSBarcodeManager } = NativeModules
@@ -56,11 +58,16 @@ export default class TPSBarcode extends Component {
   render() {
     const { children, styles, onBarcodeScanned } = this.props
     return (
-      <ScannerView
-        style={{ width: styles.width, height: styles.height }}
-        onBarcodeScanned={onBarcodeScanned}>
-        {children}
-      </ScannerView>
+      <View>
+        <ScannerView
+          style={{ width: styles.width, height: styles.height }}
+          onBarcodeScanned={onBarcodeScanned}>
+          {children}
+        </ScannerView>
+        <Button title="Gallery" onPress={() => TPSBarcodeManager.openGallery()}>
+          Gallery
+        </Button>
+      </View>
     )
   }
 }

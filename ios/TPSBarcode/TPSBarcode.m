@@ -73,14 +73,17 @@
     for (AVMetadataMachineReadableCodeObject *metadata in metadataObjects) {
         for (id barCodeType in barCodeTypes) {
             if ([metadata.type isEqualToString:barCodeType]) {
-                NSDictionary *event = @{
-                    @"type": metadata.type,
-                    @"data": metadata.stringValue
-                };
-                _onBarcodeScanned(event);
+                [self barcodeScanned:metadata.stringValue];
             }
         }
     }
+}
+
+- (void) barcodeScanned: (NSString *)result  {
+    NSDictionary *event = @{
+        @"data": result
+    };
+    _onBarcodeScanned(event);
 }
 
 - (void) layoutSubviews {

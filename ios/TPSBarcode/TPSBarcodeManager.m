@@ -10,9 +10,10 @@
 #import "TPSBarcode.h"
 #import <RCTBridgeModule.h>
 #import <RCTLog.h>
+#import <RCTUtils.h>
 #import "UIView+React.h"
 
-@interface TPSBarcodeManager ()
+@interface TPSBarcodeManager () <UIImagePickerControllerDelegate>
 
 @property (nonatomic, strong) TPSBarcode *barcodeView;
 
@@ -56,6 +57,30 @@ RCT_EXPORT_VIEW_PROPERTY(onBarcodeScanned, RCTBubblingEventBlock);
 
 RCT_EXPORT_METHOD(startCamera) {
     [self.barcodeView startCamera];
+}
+
+RCT_EXPORT_METHOD(openGallery) {
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePickerController.delegate = self;
+    
+    [RCTPresentedViewController() presentViewController:imagePickerController animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
+    
+    CIDetector *detector = [CIDetector detectorOfType:CIDetectorTypeQRCode context:nil options:@{CIDetectorAccuracy:CIDetectorAccuracyHigh}];
+    if (detector)  {
+        CIImage *ciImage = [[CIImage alloc] initWithCGImage:image.CGImage];
+        NSArray *featuresR = [detector featuresInImage:ciImage];
+        
+        if (featuresR.count) {
+            CIQRCodeFeature* featureR = featuresR.firstObject;
+            [self.barcodeView barcodeScanned:featureR.messageString];
+        }
+    }
 }
 
 RCT_EXPORT_METHOD(checkDeviceAuthorizationStatus:(RCTPromiseResolveBlock)resolve
