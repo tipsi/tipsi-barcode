@@ -21,12 +21,14 @@
 
 - (id) initWithQueue:(dispatch_queue_t)queue {
     if (self = [super init]) {
-        self.session = [AVCaptureSession new];
+        self.session = [[AVCaptureSession alloc] init];
         
-        self.previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:self.session];
-        [self.layer insertSublayer:self.previewLayer atIndex:0];
-        [self.previewLayer setNeedsDisplayOnBoundsChange:YES];
-        [self.previewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+        #if !(TARGET_IPHONE_SIMULATOR)
+            self.previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:self.session];
+            [self.layer insertSublayer:self.previewLayer atIndex:0];
+            [self.previewLayer setNeedsDisplayOnBoundsChange:YES];
+            [self.previewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+        #endif
         
         self.queue = queue;
     }
@@ -49,7 +51,9 @@
 
 - (void) startCamera {
     [self initCamera];
-    [self.session startRunning];
+    #if !(TARGET_IPHONE_SIMULATOR)
+        [self.session startRunning];
+    #endif
 }
 
 - (void) stopCapture {
