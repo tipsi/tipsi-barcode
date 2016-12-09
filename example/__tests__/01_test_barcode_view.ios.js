@@ -26,7 +26,8 @@ test('Test if user can see barcode scanner', async (t) => {
       .waitForVisible(permissionOkButton, 60000)
       .click(permissionOkButton)
   } catch (e) {
-    // Do nothing
+    await helper.screenshot()
+    await helper.source()
   }
 
   try {
