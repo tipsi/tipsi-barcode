@@ -32,16 +32,6 @@ class Helper {
       port: config.appiumPort,
       connectionRetryTimeout: 1200000, // 20 min
     })
-
-    setTimeout(() => {
-      if (config.platformName === 'android') {
-        addAndroidPermissions(
-          config.deviceName,
-          'com.example',
-          ['CAMERA']
-        )
-      }
-    }, 10000)
     await this.driver.init()
   }
 

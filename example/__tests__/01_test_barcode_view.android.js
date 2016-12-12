@@ -7,7 +7,7 @@ test('Test if user can see barcode scanner', async (t) => {
   const screen = elements()
 
   try {
-    await driver.waitForVisible(screen.title, 30000)
+    await driver.waitForVisible(screen.title, 60000)
     const title = await driver.getText(screen.title)
     t.equal(title, 'Tipsi Barcode Scanner', 'Title is correct')
 
