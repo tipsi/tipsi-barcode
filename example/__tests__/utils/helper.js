@@ -41,7 +41,7 @@ class Helper {
           ['CAMERA']
         )
       }
-    }, 3000)
+    }, 10000)
     await this.driver.init()
   }
 
