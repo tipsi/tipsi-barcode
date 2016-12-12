@@ -60,8 +60,8 @@ public class TPSBarcodeModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void openGallery() {
         Intent galleryIntent = new Intent(
-                Intent.ACTION_PICK,
-                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+            Intent.ACTION_PICK,
+            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI
         );
         getCurrentActivity().startActivityForResult(galleryIntent, RESULT_GALLERY);
     }
@@ -89,7 +89,7 @@ public class TPSBarcodeModule extends ReactContextBaseJavaModule {
         event.putString("data", result.rawValue);
         event.putString("type", Integer.toString(result.format));
         reactContext
-                .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-                .emit("scannerBarcodeRead", event);
+            .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+            .emit("scannerBarcodeRead", event);
     }
 }
