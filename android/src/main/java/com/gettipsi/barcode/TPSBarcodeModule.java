@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.util.SparseArray;
 
 import com.facebook.react.bridge.ActivityEventListener;
@@ -76,11 +75,7 @@ public class TPSBarcodeModule extends ReactContextBaseJavaModule {
                 for (int i = 0; i < sparseArray.size(); i++) {
                     sendEvent(sparseArray.valueAt(i));
                 }
-            } else {
-                Log.e("LOG_TAG", "SparseArray null or empty");
             }
-        } else {
-            Log.e("LOG_TAG", "Detector dependencies are not yet downloaded");
         }
     }
 
