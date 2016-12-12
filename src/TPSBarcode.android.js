@@ -1,10 +1,13 @@
 import React, { Component, PropTypes } from 'react'
 import {
   View,
+  Button,
   NativeAppEventEmitter,
   requireNativeComponent,
+  NativeModules,
 } from 'react-native'
 
+const { TPSBarcodeModule } = NativeModules
 const ScannerView = requireNativeComponent('TPSBarcode', TPSBarcode)
 
 export default class TPSBarcode extends Component {
@@ -29,9 +32,14 @@ export default class TPSBarcode extends Component {
   render() {
     const { children, styles } = this.props
     return (
-      <ScannerView style={styles}>
-        {children}
-      </ScannerView>
+      <View>
+        <ScannerView style={styles}>
+          {children}
+        </ScannerView>
+        <Button title="Gallery" onPress={() => TPSBarcodeModule.openGallery()}>
+          Gallery
+        </Button>
+      </View>
     )
   }
 }
