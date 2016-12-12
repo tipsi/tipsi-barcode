@@ -8,9 +8,14 @@ export default function elements() {
         XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/
         XCUIElementTypeStaticText
       `),
-      android: id(`
+      /* V6
         //android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/
         android.widget.FrameLayout[1]/android.view.ViewGroup[1]/android.widget.TextView[1]
+       */
+      // V5
+      android: id(`
+        //android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/
+        android.widget.FrameLayout[1]/android.view.View[1]/android.widget.TextView[1]
       `),
     },
     camera: {
@@ -19,10 +24,17 @@ export default function elements() {
         XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/
         XCUIElementTypeOther/XCUIElementTypeOther
       `),
-      android: id(`
+
+      /* V6
         //android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/
         android.widget.FrameLayout[1]/android.view.ViewGroup[1]/
         android.view.ViewGroup[1]/android.view.View[1]
+       */
+      // V5
+      android: id(`
+        //android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/
+        android.widget.FrameLayout[1]/android.view.View[1]
+        /android.view.View[1]/android.view.View[1]
       `),
     },
     permissionOkButton: {
@@ -33,10 +45,17 @@ export default function elements() {
         XCUIElementTypeButton
       `),
     },
+
+    /* V6
+      //android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/
+      android.widget.FrameLayout[1]/android.view.ViewGroup[1]/
+      android.widget.Button[1]/android.widget.TextView[1]
+     */
+    // V5
     galleryButton: {
       android: id(`
         //android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/
-        android.widget.FrameLayout[1]/android.view.ViewGroup[1]/
+        android.widget.FrameLayout[1]/android.view.View[1]/
         android.widget.Button[1]/android.widget.TextView[1]
       `),
     },
