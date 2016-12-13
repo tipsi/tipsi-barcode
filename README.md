@@ -1,11 +1,13 @@
 [![Build Status](https://travis-ci.org/tipsi/tipsi-barcode.svg?branch=master)](https://travis-ci.org/tipsi/tipsi-barcode)
 
 # tipsi-barcode
-React Native Barcode Scanner for IOS/Android
+React Native Barcode Scanner for iOS/Android
 
-### iOS                                 Android
+### iOS
 ![image](https://cloud.githubusercontent.com/assets/1788245/20975154/9a6bcda0-bcaf-11e6-9a42-6584e1beeb49.png)
-![image](https://cloud.githubusercontent.com/assets/1788245/21138338/a1457552-c13e-11e6-9d1f-42ad42834b09.png)
+
+### Android
+![image](https://cloud.githubusercontent.com/assets/1788245/21139504/3cae80ce-c144-11e6-985a-afade1814960.png)
 
 ## Usage
 ```js
@@ -24,11 +26,11 @@ class BarcodeScannerScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={{ marginBottom: 20, fontSize: 20, fontWeight: 'bold' }}>
+        <Text style={styles.title}>
           Tipsi Barcode Scanner
         </Text>
         <TPSBarcode styles={styles.scanner} onBarcodeScanned={this.handleBarcodeScanned} />
-        <Text style={{ marginTop: 20, fontSize: 16 }}>
+        <Text style={styles.result}>
           {this.state.scannedText}
         </Text>
       </View>
@@ -36,6 +38,8 @@ class BarcodeScannerScreen extends React.Component {
   }
 }
 ```
+
+See more in [example](https://github.com/tipsi/tipsi-barcode/tree/master/example) directory
 
 ## License
 
