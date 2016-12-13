@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import {
+  NativeModules,
+  requireNativeComponent,
+  NativeAppEventEmitter,
   View,
   Button,
-  NativeAppEventEmitter,
-  requireNativeComponent,
-  NativeModules,
 } from 'react-native'
 
 const { TPSBarcodeModule } = NativeModules
@@ -21,12 +21,18 @@ export default class TPSBarcode extends Component {
   }
 
   componentWillMount() {
-    this.barcodeListener = NativeAppEventEmitter
-      .addListener('scannerBarcodeRead', this.props.onBarcodeScanned)
+    this.barcodeListener = NativeAppEventEmitter.addListener(
+      'scannerBarcodeRead',
+      this.props.onBarcodeScanned
+    )
   }
 
   componentWillUnmount() {
     this.barcodeListener.remove()
+  }
+
+  handlePress = () => {
+    TPSBarcodeModule.openGallery()
   }
 
   render() {
@@ -36,7 +42,7 @@ export default class TPSBarcode extends Component {
         <ScannerView style={styles}>
           {children}
         </ScannerView>
-        <Button title="Gallery" onPress={() => TPSBarcodeModule.openGallery()}>
+        <Button title="Gallery" onPress={this.handlePress}>
           Gallery
         </Button>
       </View>

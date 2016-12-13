@@ -55,13 +55,17 @@ export default class TPSBarcode extends Component {
     }
   }
 
+  handleBarcodeScanned = ({ nativeEvent }) => {
+    this.props.onBarcodeScanned(nativeEvent)
+  }
+
   render() {
-    const { children, styles, onBarcodeScanned } = this.props
+    const { children, styles } = this.props
     return (
       <View>
         <ScannerView
-          style={{ width: styles.width, height: styles.height }}
-          onBarcodeScanned={onBarcodeScanned}>
+          style={styles}
+          onBarcodeScanned={this.handleBarcodeScanned}>
           {children}
         </ScannerView>
         <Button title="Gallery" onPress={() => TPSBarcodeManager.openGallery()}>
