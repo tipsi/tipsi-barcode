@@ -1,6 +1,5 @@
 import { remote } from 'webdriverio'
 import plugins from './plugins'
-import addAndroidPermissions from './core/add-android-permissions'
 
 class Helper {
   driver = null
