@@ -39,10 +39,10 @@ export default class TPSBarcode extends Component {
     const { children, styles } = this.props
     return (
       <View>
-        <ScannerView style={styles}>
+        <ScannerView style={styles} accessible accessibilityLabel="scanner">
           {children}
         </ScannerView>
-        <Button title="Gallery" onPress={this.handlePress}>
+        <Button title="Gallery" onPress={this.handlePress} accessible accessibilityLabel="gallery">
           Gallery
         </Button>
       </View>

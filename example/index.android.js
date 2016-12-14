@@ -21,11 +21,11 @@ export default class example extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>
+        <Text style={styles.title} accessible accessibilityLabel="title">
           Tipsi Barcode Scanner
         </Text>
         <TPSBarcode styles={styles.scanner} onBarcodeScanned={this.handleBarcodeScanned} />
-        <Text style={styles.result}>
+        <Text style={styles.result} accessible accessibilityLabel="result">
           {this.state.scannedText}
         </Text>
       </View>

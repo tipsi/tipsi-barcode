@@ -65,15 +65,16 @@ const allowedPlatformNames = ['ios', 'android'];
     }
 
     // Check Device Name
+    let device
     const deviceNotSpecified = !DEVICE_NAME || !PLATFORM_VERSION
     if (deviceNotSpecified && PLATFORM_NAME === 'android') {
-      const device = await findAndroidDevice()
+      device = await findAndroidDevice()
       console.log(`Found next Android device: ${device.id}, version: ${device.version}`)
       DEVICE_NAME = device.id
       PLATFORM_VERSION = device.version
     }
     if (PLATFORM_NAME === 'ios') {
-      const device = await findiOSDevice(DEVICE_NAME, PLATFORM_VERSION)
+      device = await findiOSDevice(DEVICE_NAME, PLATFORM_VERSION)
       console.log(`Found next iOS device: ${device.type}, version: ${device.version}`)
       DEVICE_NAME = device.type
       PLATFORM_VERSION = device.version
