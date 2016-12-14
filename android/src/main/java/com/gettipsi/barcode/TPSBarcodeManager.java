@@ -44,7 +44,6 @@ public class TPSBarcodeManager extends ViewGroupManager<TPSBarcodeView> implemen
 
     @Override
     public void onHostDestroy() {
-        mReaderView.stop();
         mReaderView.release();
     }
 }
