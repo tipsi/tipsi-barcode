@@ -48,7 +48,7 @@ public class TPSBarcodeView extends CameraSourcePreview {
      *
      * @param barcodes - a list of detected barcodes
      */
-    protected void onBarcodesUpdated(List<Barcode> barcodes){
+    private void onBarcodesUpdated(List<Barcode> barcodes){
         if (barcodes.size() > 0) {
             Barcode result = barcodes.get(0);
             WritableMap event = Arguments.createMap();
@@ -69,7 +69,7 @@ public class TPSBarcodeView extends CameraSourcePreview {
      * Removes update listener from graphic overlay
      */
 
-    protected void stopUpdates(){
+    private void stopUpdates(){
         mGraphicOverlay.setUpdateListener(null);
     }
     /**
