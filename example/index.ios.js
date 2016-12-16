@@ -1,9 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react'
 import {
   AppRegistry,
@@ -20,18 +14,18 @@ export default class example extends Component {
     scannedText: '',
   }
 
-  onBarcodeScanned = ({ nativeEvent: { data: scannedText = '' } }) => {
+  handleBarcodeScanned = ({ data: scannedText = '' }) => {
     this.setState({ scannedText })
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text style={{ marginBottom: 20, fontSize: 20, fontWeight: 'bold' }}>
+        <Text style={styles.title}>
           Tipsi Barcode Scanner
         </Text>
-        <TPSBarcode styles={styles.scanner} onBarcodeScanned={this.onBarcodeScanned} />
-        <Text style={{ marginTop: 20, fontSize: 16 }}>
+        <TPSBarcode styles={styles.scanner} onBarcodeScanned={this.handleBarcodeScanned} />
+        <Text style={styles.result}>
           {this.state.scannedText}
         </Text>
       </View>
@@ -46,14 +40,18 @@ const styles = {
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
+  title: {
+    marginBottom: 20,
     fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+    fontWeight: 'bold',
   },
   scanner: {
     width,
     height: height - 150,
+  },
+  result: {
+    marginTop: 20,
+    fontSize: 16,
   },
 }
 
