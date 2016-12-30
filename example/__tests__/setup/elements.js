@@ -1,5 +1,7 @@
+import helper from 'tipsi-appium-helper'
+
 export default function elements() {
-  const { idFromXPath, idFromAccessId } = this
+  const { config, idFromXPath, idFromAccessId } = this
 
   const selectors = {
     title: {
@@ -33,12 +35,14 @@ export default function elements() {
 
 
   return Object.keys(selectors).reduce((memo, item) => {
-    const currentImplementation = selectors[item][this.config.platformName]
+    const currentImplementation = selectors[item][config.platformName]
     if (currentImplementation) {
       /* eslint no-param-reassign: 0 */
-      memo[item] = selectors[item][this.config.platformName]
+      memo[item] = selectors[item][config.platformName]
     }
 
     return memo
   }, {})
 }
+
+helper.extend('elements', elements)
