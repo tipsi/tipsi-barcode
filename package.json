@@ -22,12 +22,6 @@
     "url": "https://github.com/tipsi/tipsi-barcode/issues"
   },
   "homepage": "https://github.com/tipsi/tipsi-barcode#readme",
-  "rnpm": {
-    "commands": {
-      "prelink": "node_modules/tipsi-barcode/scripts/pre-link.sh",
-      "postlink": "node_modules/tipsi-barcode/scripts/post-link.sh"
-    }
-  },
   "peerDependencies": {
     "react-native": "*"
   },
