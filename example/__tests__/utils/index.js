@@ -25,7 +25,6 @@ helper.elements = function () {
       `),
     },
     galleryButton: {
-      ios: idFromAccessId('gallery'),
       android: idFromAccessId('gallery'),
     },
   }
