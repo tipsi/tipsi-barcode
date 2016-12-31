@@ -13,10 +13,11 @@ test('Test if user can see barcode scanner', async (t) => {
 
     await driver.waitForVisible(screen.camera, 60000)
     t.pass('User should see barcode scanner view')
+
+    await driver.waitForVisible(screen.galleryButton, 60000)
+    t.pass('User should see gallery button')
   } catch (error) {
     await helper.screenshot()
     await helper.source()
-
-    throw error
   }
 })

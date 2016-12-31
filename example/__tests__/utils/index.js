@@ -5,18 +5,14 @@ helper.elements = function () {
 
   const selectors = {
     title: {
-      ios: idFromXPath(`
-        //XCUIElementTypeApplication/XCUIElementTypeWindow/XCUIElementTypeOther/
-        XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/
-        XCUIElementTypeStaticText
-      `),
+      ios: idFromAccessId('Tipsi Barcode Scanner'),
       android: idFromAccessId('title'),
     },
     camera: {
       ios: idFromXPath(`
         //XCUIElementTypeApplication/XCUIElementTypeWindow/XCUIElementTypeOther/
         XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/
-        XCUIElementTypeOther/XCUIElementTypeOther
+        XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther
       `),
       android: idFromAccessId('scanner'),
     },
@@ -29,6 +25,7 @@ helper.elements = function () {
       `),
     },
     galleryButton: {
+      ios: idFromAccessId('gallery'),
       android: idFromAccessId('gallery'),
     },
   }
