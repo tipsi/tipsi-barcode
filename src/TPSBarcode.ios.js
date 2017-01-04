@@ -68,7 +68,9 @@ export default class TPSBarcode extends Component {
           onBarcodeScanned={this.handleBarcodeScanned}>
           {children}
         </ScannerView>
-        <Button title="Gallery" onPress={() => TPSBarcodeManager.openGallery()}>
+        <Button
+          title="Gallery"
+          onPress={() => TPSBarcodeManager.openGallery()}>
           Gallery
         </Button>
       </View>

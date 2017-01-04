@@ -3,6 +3,7 @@ import {
   NativeModules,
   requireNativeComponent,
   NativeAppEventEmitter,
+  PermissionsAndroid,
   View,
   Button,
 } from 'react-native'
@@ -20,11 +21,21 @@ export default class TPSBarcode extends Component {
     onBarcodeScanned: () => {},
   }
 
-  componentWillMount() {
+  state = {
+    granted: false,
+  }
+
+  async componentWillMount() {
     this.barcodeListener = NativeAppEventEmitter.addListener(
       'scannerBarcodeRead',
       this.props.onBarcodeScanned
     )
+
+    const granted = await PermissionsAndroid.requestPermission(
+      PermissionsAndroid.PERMISSIONS.CAMERA
+    )
+
+    this.setState({ granted })
   }
 
   componentWillUnmount() {
@@ -37,11 +48,12 @@ export default class TPSBarcode extends Component {
 
   render() {
     const { children, styles } = this.props
+    const CameraView = this.state.granted ? ScannerView : View
     return (
       <View>
-        <ScannerView style={styles} accessible accessibilityLabel="scanner">
+        <CameraView style={styles} accessible accessibilityLabel="scanner">
           {children}
-        </ScannerView>
+        </CameraView>
         <Button title="Gallery" onPress={this.handlePress} accessible accessibilityLabel="gallery">
           Gallery
         </Button>
