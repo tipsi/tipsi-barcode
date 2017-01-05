@@ -1,22 +1,24 @@
-export default function elements() {
-  const { idFromXPath, idFromAccessId } = this
+import helper from 'tipsi-appium-helper'
+
+helper.elements = function () {
+  const { idFromXPath, idFromAccessId, idFromResourceId } = this
 
   const selectors = {
     title: {
-      ios: idFromXPath(`
-        //XCUIElementTypeApplication/XCUIElementTypeWindow/XCUIElementTypeOther/
-        XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/
-        XCUIElementTypeStaticText
-      `),
+      ios: idFromAccessId('Tipsi Barcode Scanner'),
       android: idFromAccessId('title'),
     },
     camera: {
       ios: idFromXPath(`
         //XCUIElementTypeApplication/XCUIElementTypeWindow/XCUIElementTypeOther/
         XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/
-        XCUIElementTypeOther/XCUIElementTypeOther
+        XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther
       `),
       android: idFromAccessId('scanner'),
+    },
+    openScannerButton: {
+      ios: idFromAccessId('show'),
+      android: idFromAccessId('show'),
     },
     permissionOkButton: {
       ios: idFromXPath(`
@@ -25,8 +27,14 @@ export default function elements() {
         XCUIElementTypeOther[3]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[3]/
         XCUIElementTypeButton
       `),
+      android: idFromResourceId('com.android.packageinstaller:id/permission_allow_button'),
     },
     galleryButton: {
+      ios: idFromXPath(`
+        //XCUIElementTypeApplication/XCUIElementTypeWindow/XCUIElementTypeOther/
+        XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/
+        XCUIElementTypeOther/XCUIElementTypeButton
+      `),
       android: idFromAccessId('gallery'),
     },
   }
@@ -36,9 +44,11 @@ export default function elements() {
     const currentImplementation = selectors[item][this.config.platformName]
     if (currentImplementation) {
       /* eslint no-param-reassign: 0 */
-      memo[item] = selectors[item][this.config.platformName]
+      memo[item] = currentImplementation
     }
 
     return memo
   }, {})
-}
+}.bind(helper)
+
+export default helper

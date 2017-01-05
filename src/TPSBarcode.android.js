@@ -3,6 +3,7 @@ import {
   NativeModules,
   requireNativeComponent,
   NativeAppEventEmitter,
+  PermissionsAndroid,
   View,
   Button,
 } from 'react-native'
@@ -19,6 +20,24 @@ export default class TPSBarcode extends Component {
   static defaultProps = {
     onBarcodeScanned: () => {},
   }
+
+  static requestCameraPermission = ({ title, message } = {}) => (
+    new Promise(async (resolve) => {
+      try {
+        const granted = await PermissionsAndroid.requestPermission(
+          PermissionsAndroid.PERMISSIONS.CAMERA, {
+            title: title || 'Cool Photo App Camera Permission',
+            message: message ||
+              'Cool Photo App needs access to your camera so you can take awesome pictures.',
+          }
+        )
+
+        resolve(granted)
+      } catch (err) {
+        resolve(false)
+      }
+    })
+  )
 
   componentWillMount() {
     this.barcodeListener = NativeAppEventEmitter.addListener(
