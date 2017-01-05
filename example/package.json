@@ -21,8 +21,8 @@
     "react": "15.4.1",
     "react-addons-shallow-compare": "15.4.1",
     "react-native": "0.39.2",
-    "tipsi-barcode": "../",
-    "tipsi-appium-helper": "github:tipsi/tipsi-appium-helper#development"
+    "tipsi-appium-helper": "1.0.0",
+    "tipsi-barcode": "../"
   },
   "devDependencies": {
     "appium": "1.6.3",
