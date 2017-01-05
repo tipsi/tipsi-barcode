@@ -1,7 +1,7 @@
 import helper from 'tipsi-appium-helper'
 
 helper.elements = function () {
-  const { idFromXPath, idFromAccessId } = this
+  const { idFromXPath, idFromAccessId, idFromResourceId } = this
 
   const selectors = {
     title: {
@@ -16,6 +16,10 @@ helper.elements = function () {
       `),
       android: idFromAccessId('scanner'),
     },
+    openScannerButton: {
+      ios: idFromAccessId('show'),
+      android: idFromAccessId('show'),
+    },
     permissionOkButton: {
       ios: idFromXPath(`
         //XCUIElementTypeApplication/XCUIElementTypeWindow[6]/XCUIElementTypeOther[2]/
@@ -23,8 +27,14 @@ helper.elements = function () {
         XCUIElementTypeOther[3]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[3]/
         XCUIElementTypeButton
       `),
+      android: idFromResourceId('com.android.packageinstaller:id/permission_allow_button'),
     },
     galleryButton: {
+      ios: idFromXPath(`
+        //XCUIElementTypeApplication/XCUIElementTypeWindow/XCUIElementTypeOther/
+        XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/
+        XCUIElementTypeOther/XCUIElementTypeButton
+      `),
       android: idFromAccessId('gallery'),
     },
   }

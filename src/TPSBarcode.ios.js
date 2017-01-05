@@ -27,33 +27,38 @@ export default class TPSBarcode extends Component {
     styles: {},
   }
 
-  async componentWillMount() {
-    try {
-      await TPSBarcodeManager.checkDeviceAuthorizationStatus()
-      TPSBarcodeManager.startCamera()
-    } catch (error) {
-      Alert.alert(
-        'Permissions error',
-        errorDescription[error.userInfo.reason],
-        [
-          { text: 'Cancel', onPress: () => {} },
-          { text: 'Grant Access',
-            onPress: async () => {
-              try {
-                await TPSBarcodeManager.openAppSettings()
-              } catch (e) {
-                Alert.alert(
-                  'Grant Access',
-                  'Try to give access to Camera and Microphone manually',
-                  [{ text: 'OK', onPress: () => {} }],
-                )
-              }
+  static requestCameraPermission = () => (
+    new Promise(async (resolve) => {
+      try {
+        await TPSBarcodeManager.checkDeviceAuthorizationStatus()
+        TPSBarcodeManager.startCamera()
+        resolve(true)
+      } catch (error) {
+        Alert.alert(
+          'Permissions error',
+          errorDescription[error.userInfo.reason],
+          [
+            { text: 'Cancel', onPress: () => {} },
+            { text: 'Grant Access',
+              onPress: async () => {
+                try {
+                  await TPSBarcodeManager.openAppSettings()
+                  resolve(true)
+                } catch (e) {
+                  resolve(false)
+                  Alert.alert(
+                    'Grant Access',
+                    'Try to give access to Camera and Microphone manually',
+                    [{ text: 'OK', onPress: () => {} }],
+                  )
+                }
+              },
             },
-          },
-        ],
-      )
-    }
-  }
+          ],
+        )
+      }
+    })
+  )
 
   handleBarcodeScanned = ({ nativeEvent }) => {
     this.props.onBarcodeScanned(nativeEvent)
