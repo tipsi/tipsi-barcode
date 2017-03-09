@@ -6,7 +6,7 @@
 //
 //
 
-#import "RCTViewManager.h"
+#import <React/RCTViewManager.h>
 #import <AVFoundation/AVFoundation.h>
 
 @interface TPSBarcodeManager : RCTViewManager

@@ -6,11 +6,11 @@
 //
 //
 
-#import "TPSBarcode.h"
-#import "RCTBridge.h"
-#import "RCTEventDispatcher.h"
-#import "RCTLog.h"
-#import "UIView+React.h"
+#import "TPSBarcode.h>
+#import <React/RCTBridge.h>
+#import <React/RCTEventDispatcher.h>
+#import <React/RCTLog.h>
+#import <React/UIView+React.h>
 #import <AVFoundation/AVFoundation.h>
 
 @implementation TPSBarcode
@@ -22,14 +22,14 @@
 - (id) initWithQueue:(dispatch_queue_t)queue {
     if (self = [super init]) {
         self.session = [[AVCaptureSession alloc] init];
-        
+
         #if !(TARGET_IPHONE_SIMULATOR)
             self.previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:self.session];
             [self.layer insertSublayer:self.previewLayer atIndex:0];
             [self.previewLayer setNeedsDisplayOnBoundsChange:YES];
             [self.previewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
         #endif
-        
+
         self.queue = queue;
     }
     return self;
@@ -44,7 +44,7 @@
     [self.session addInput:input];
     AVCaptureMetadataOutput *captureMetadataOutput = [AVCaptureMetadataOutput new];
     [self.session addOutput:captureMetadataOutput];
-    
+
     [captureMetadataOutput setMetadataObjectsDelegate:self queue:self.queue];
     [captureMetadataOutput setMetadataObjectTypes:[captureMetadataOutput availableMetadataObjectTypes]];
 }
@@ -73,7 +73,7 @@
         AVMetadataObjectTypeQRCode,
         AVMetadataObjectTypeAztecCode
     ];
-    
+
     for (AVMetadataMachineReadableCodeObject *metadata in metadataObjects) {
         for (id barCodeType in barCodeTypes) {
             if ([metadata.type isEqualToString:barCodeType]) {

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UIView+React.h"
+#import <React/UIView+React.h>
 #import <RCTBridge.h>
 #import <AVFoundation/AVFoundation.h>
 
