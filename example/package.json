@@ -18,9 +18,9 @@
     "test": "npm-run-all test:*"
   },
   "dependencies": {
-    "react": "15.4.1",
+    "react": "15.4.2",
     "react-addons-shallow-compare": "15.4.1",
-    "react-native": "0.42.0",
+    "react-native": "^0.42.0",
     "tipsi-appium-helper": "1.0.0",
     "tipsi-barcode": "../"
   },

@@ -6,7 +6,7 @@
 //
 //
 
-#import "TPSBarcode.h>
+#import "TPSBarcode.h"
 #import <React/RCTBridge.h>
 #import <React/RCTEventDispatcher.h>
 #import <React/RCTLog.h>
